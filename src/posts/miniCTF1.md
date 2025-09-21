@@ -25,8 +25,7 @@ Tìm flag có dạng `miniCTF{...}`
 **Flag format:**  
 ```
 miniCTF{FAKE_FLAG_FAKE_FLAG}
-
----
+```
 
 ## 2. Recon / Analysis (Phân tích đề)
 
