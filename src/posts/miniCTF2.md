@@ -14,7 +14,7 @@
 - [7. Bài học rút ra (Lessons)](#7-bài-học-rút-ra-lessons)
 - [Appendix — Evidence & Notes](#appendix---evidence--notes)
 
-# 1. Màn mở đầu — một lời mời của Mad Hatter
+## 1. Màn mở đầu — một lời mời của Mad Hatter
 
 Vào một buổi chiều, tôi mở challenge **The Queen's Secret** (500 pts). Giao diện chào đón rất chỉn chu: tiêu đề to, gradient nền bắt mắt, một đoạn dẫn truyện và một ô nhập tên. Mad Hatter đứng giữa, nháy mắt và nói:
 
@@ -24,7 +24,7 @@ Cảm giác ban đầu: giao diện đẹp nhưng “im lặng” — và trong 
 
 ![cover placeholder](/images/miniCTF/TheQueenSecret/dashboard.png)
 
-# 2. Thăm dò & thử nhập (Recon / First touch)
+## 2. Thăm dò & thử nhập (Recon / First touch)
 
 Tôi không lao ngay vào payload mạnh. Trước hết:
 
@@ -38,7 +38,7 @@ Kết quả: trang hiển thị một lời chào đơn giản trong phần “L
 
 > Ghi chú: lúc này ta chưa thấy token, id, hay endpoint đặc biệt — chỉ có request đơn giản khi tải trang / submit.
 
-# 3. Quan sát HTTP (Burp → HTTP history)
+## 3. Quan sát HTTP (Burp → HTTP history)
 
 Mục tiêu tiếp theo là quan sát request/response khi load trang. Mở **Burp → Proxy → HTTP history** và xem request GET `/` (hoặc request submit).
 
@@ -47,13 +47,13 @@ Mục tiêu tiếp theo là quan sát request/response khi load trang. Mở **Bu
 Cookie: queen=false
 ```
 
-Tôi chụp ảnh màn hình HTTP history (placeholder bên dưới) để lưu evidence.
+Tôi chụp ảnh màn hình HTTP history để lưu evidence.
 
 ![burp-http-history-placeholder](/images/miniCTF/TheQueenSecret/requestindex.png)
 
 > Nhận xét: Một cookie boolean `queen=false` xuất hiện. Rõ ràng đây là giá trị client-side. Nếu server dùng cookie này để quyết định hiển thị khu vực "bí mật", thì việc chỉnh cookie có khả năng thay đổi UI/behavior.
 
-# 4. Đánh giá giả thuyết & nghịch cookie (Tampering)
+## 4. Đánh giá giả thuyết & nghịch cookie (Tampering)
 
 Giả thuyết: `queen=false` → không được xem khu vực bí mật; `queen=true` → được xem.
 
@@ -76,23 +76,21 @@ GET / HTTP/1.1
 Host: 103.249.117.57:6636
 Cookie: queen=true
 ```
-(Screenshots: Burp Repeater request with `queen=true` placeholder)
-
 ![burp-repeater-placeholder](/images/miniCTF/TheQueenSecret/repeatcher.png)
 
-# 5. Kết quả — Khu vực bí mật hé lộ (Flag)
+## 5. Kết quả — Khu vực bí mật hé lộ (Flag)
 
 Sau khi chỉnh cookie và bấm submit lại, phần nội dung trên trang thay đổi tức thì: một khung “Khu vực bí mật của Heart Queen” xuất hiện, và giữa đó — **flag**:
 ```
 miniCTF{411c3_1n_W0nd3rl4nd}
 ```
-Tôi chụp ảnh trang hiển thị flag làm chứng (placeholder).
+Tôi chụp ảnh trang hiển thị flag làm chứng.
 
 ![flag-placeholder](/images/miniCTF/TheQueenSecret/flag.png)
 
 Cảm giác lúc đó — giống như vừa mở kho báu: đơn giản, ngọt ngào, và rất thuyết phục.
 
-# 6. Tái hiện (Repro) — từng bước cho bạn làm lại
+## 6. Tái hiện (Repro) — từng bước cho bạn làm lại
 
 Dưới đây là các bước cụ thể để ai cũng có thể tái hiện:
 
@@ -106,7 +104,7 @@ Dưới đây là các bước cụ thể để ai cũng có thể tái hiện:
 8. Quay về tab trình duyệt (đi qua Burp) và bấm **Gửi cho Mad Hatter** lần nữa.  
 9. Quan sát phần “Khu vực bí mật” hiển thị flag. Lưu screenshot trang + request/response trong Burp.
 
-# 7. Bài học rút ra (Lessons)
+## 7. Bài học rút ra (Lessons)
 
 - **Không bao giờ tin dữ liệu client-side.** Cookie, localStorage, URL params, form fields — tất cả đều có thể bị chỉnh sửa bởi attacker.  
 - **Không dùng client-side flag/boolean để kiểm soát quyền truy cập**. Mọi quyết định phân quyền phải có xác thực server-side.  
