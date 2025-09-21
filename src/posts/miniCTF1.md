@@ -92,6 +92,7 @@ Tim tôi đập nhanh khi nhấn **Go** gửi request mới.
 ## 5. Khám phá kho báu (Flag)
 
 Server trả về trang — và trong body, như một kho báu được mở nắp, dòng chữ kia hiện ra rõ ràng:
+
 ![Flag page](images/07_flag.png)
 
 Chiếc bánh quy ngọt ngào đã thuộc về Oguri Cap.  
