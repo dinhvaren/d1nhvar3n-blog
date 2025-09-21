@@ -18,9 +18,7 @@ Một buổi chiều mưa, tôi mở đề CTF: **Super Cookie**.
 Điểm số 500 — khá cao, chắc hẳn không dễ dàng.
 
 > **Đề bài:**  
-> "Oguri Cap đang đi tập luyện trên đường nhưng vô tình rơi vào thế giới VulnderLand.  
-> Do liên tục chạy trong nhiều giây, dần dần cô ấy cảm thấy đói và thèm bánh quy.  
-> Bạn hãy giúp cô ấy tìm được bánh quy để tiếp tục chạy nhé!"
+> "Oguri Cap đang đi tập luyện trên đường nhưng vô tình rơi vào thế giới VulnderLand.Do liên tục chạy trong nhiều giây, dần dần cô ấy cảm thấy đói và thèm bánh quy. Bạn hãy giúp cô ấy tìm được bánh quy để tiếp tục chạy nhé!"
 
 Bánh quy? 🤔 Ở thế giới web thì chỉ có **cookie** là chiếc bánh quy quan trọng nhất.  
 Vậy flag rất có khả năng liên quan đến cookie hoặc session.
@@ -53,7 +51,7 @@ Cú nhìn đầu tiên đã gợi ý: đây có thể là **cookie tampering** �
 
 ## 3. Giải mã bánh quy (cookie decoding)
 
-Tôi mở Burp → **Proxy → HTTP history** hoặc DevTools → Application → Cookies để quan sát rõ hơn. Ba mục cookie hiện ra: `PHPSESSID`, `user`, và `role`.
+Tôi mở **Burp → Proxy → HTTP history** để quan sát rõ hơn. Ba mục cookie hiện ra: `PHPSESSID`, `user`, và `role`.
 
 ![Burp Suite Cookies](/images/miniCTF/SuperCookie/cookie.png)
 

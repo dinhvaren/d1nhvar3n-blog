@@ -122,13 +122,39 @@ export const GlobalStyle = createGlobalStyle`
             font-size: 20px;
         }
     }
-        .markdown-body img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 1.5rem auto; /* căn giữa + thêm khoảng cách */
-  border-radius: 6px; /* tuỳ chọn bo góc */
-}
+    .markdown-body img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1.5rem auto; /* căn giữa + thêm khoảng cách */
+      border-radius: 6px; /* tuỳ chọn bo góc */
+    }
+    .markdown-body code {
+      background-color: #161b22;   /* nền tối hơn */
+      color: #ff7b72;             /* chữ đỏ cam nổi bật */
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-family: "Fira Code", monospace;
+      font-size: 0.95em;
+    }
+
+/* Code block */
+    .markdown-body pre {
+      background-color: #0d1117;   /* nền khác biệt rõ */
+      border: 1px solid #30363d;  /* viền xám */
+      border-radius: 6px;
+      padding: 1rem;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+    }
+
+    .markdown-body pre code {
+      background: transparent;     /* bỏ nền trùng */
+      color: #c9d1d9;             /* chữ sáng */
+      font-family: "Fira Code", monospace;
+      font-size: 0.9em;
+      line-height: 1.6;
+    }
 `;
 
 export const Button = styled.button`
