@@ -158,12 +158,13 @@ updateScore(10000000000)
 Bùm. Màn hình như nổ tung. `returntof()` được gọi, `fetch('get_flag.php')` trả về, và ngay lập tức flag sáng lên ở `#flagContainer` và trong console. 
 
 ![Console - flag revealed](/images/miniCTF/FlappyBird/payload.png)
+> *khoảnh khắc flag xuất hiện.*
 
 Dòng chữ tôi mong đợi hiện ra rành rọt:
 ```
 miniCTF{d0wn_th3_r4bb1t_h0l3_w3_g0}
 ```
-(Hình 10 chụp khoảnh khắc flag xuất hiện.)
+
 
 Cảm giác — một nửa là thỏa mãn, một nửa là tội lỗi tinh tế: tôi vừa “bẻ” quy tắc chơi, nhưng đúng là tác giả đã để lộ kẽ hở — họ tin vào bảo vệ bằng số điểm, mà quên rằng client-side JavaScript luôn có thể được thao tác.
 
