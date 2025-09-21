@@ -45,7 +45,7 @@ const About = {
     formspree: "https://formspree.io/f/mandgdqy",
   },
   home: {
-    name: "d1nhvar3n",
+    name: "Luong Nguyen Ngoc Dinh",
     title: "CTF Write-ups & Security Research Blog",
     description:
       "A personal blog where I share CTF write-ups, penetration testing reports, and security research as part of my journey to becoming a red team professional.",
