@@ -30,16 +30,16 @@ Vậy flag rất có khả năng liên quan đến cookie hoặc session.
 Tôi mở trình duyệt, truy cập vào `http://103.249.117.57:4999/login.php`.  
 Một trang đăng ký / đăng nhập hiện ra, khá đơn giản. Không có gì đặc biệt ở giao diện.  
 
-![Login page](/images/miniCTF/login.png)
+![Login page](/images/miniCTF/SuperCookie/login.png)
 
 Trong đầu vang lên suy nghĩ: *“Đã là CTF thì form login hiếm khi để brute-force. Chắc chắn có trick ở cookie/session.”*  
 Bắt đầu tôi thử **đăng ký** tài khoản: `username = dinhvaren`, `password = 1234`. Sau khi đăng ký xong, tôi đăng nhập bằng tài khoản đó.
 
-![Signup page](/images/miniCTF/signup.png)
+![Signup page](/images/miniCTF/SuperCookie/signup.png)
 
 Tiếp theo tôi bật **Burp Suite** và bắt gói tin khi submit request đăng nhập. Server trả về một số cookie trong response — điều này khiến tôi chú ý.
 
-![Burp Intercept](/images/miniCTF/postLogin.png)
+![Burp Intercept](/images/miniCTF/SuperCookie/postLogin.png)
 
 Trong phần `Set-Cookie` tôi thấy:
 
@@ -55,7 +55,7 @@ Cú nhìn đầu tiên đã gợi ý: đây có thể là **cookie tampering** �
 
 Tôi mở Burp → **Proxy → HTTP history** hoặc DevTools → Application → Cookies để quan sát rõ hơn. Ba mục cookie hiện ra: `PHPSESSID`, `user`, và `role`.
 
-![Burp Suite Cookies](/images/miniCTF/cookie.png)
+![Burp Suite Cookies](/images/miniCTF/SuperCookie/cookie.png)
 
 Các giá trị hiện như sau:
 ```
@@ -75,21 +75,21 @@ Cookie: PHPSESSID=9c0b94ce3efef5f2ce62ef39b15ecd0c;
 user=dinhvaren;
 role=admin
 ```
-![Repeater Request](/images/miniCTF/setAdmin.png)
+![Repeater Request](/images/miniCTF/SuperCookie/setAdmin.png)
 
 Tim tôi đập nhanh khi nhấn **Go** gửi request mới.
 Ồ có vẻ như không thấy gì sau khi tôi đã sửa `role` thành `admin` cả, ngay lúc này trong đầu tôi suy nghĩ rằng có thể có 1 đường dẫn nào đó trong source code, tôi liền kiểm tra `index.php`.
 
-![Response index.php](/images/miniCTF/checkIndex.png)
+![Response index.php](/images/miniCTF/SuperCookie/checkIndex.png)
 
 Sau khi gửi request, ban đầu không thấy gì thay đổi trên trang index. Tôi nghi ngờ có thể flag nằm ở một endpoint ẩn, nên quyết định dò thêm các đường dẫn tiềm năng.
 Tôi dùng `ffuf` nhẹ để fuzz các file/endpoint phổ biến — không quét mạnh, chỉ vài từ khóa ngắn:
 
-![Ffuf admin.php](/images/miniCTF/Fuzz.png)
+![Ffuf admin.php](/images/miniCTF/SuperCookie/Fuzz.png)
 
 Kết quả cho thấy tồn tại `admin.php`. Tôi truy cập `/admin.php` bằng Burp để xem response.
 
-![Response admin.php](/images/miniCTF/requestAdmin.png)
+![Response admin.php](/images/miniCTF/SuperCookie/requestAdmin.png)
 
 Trang `/admin.php` không hiển thị flag trực tiếp nhưng trong nội dung trả về có gợi ý về một endpoint khác: `flag.php`. Tôi truy cập ngay `/flag.php`.
 
@@ -97,7 +97,7 @@ Trang `/admin.php` không hiển thị flag trực tiếp nhưng trong nội dun
 
 Server trả về trang chứa flag — đúng như mong đợi, chiếc bánh quy đã lộ ra:
 
-![Flag page](/images/miniCTF/CTF.png)
+![Flag page](/images/miniCTF/SuperCookie/CTF.png)
 
 Chiếc bánh quy ngọt ngào đã thuộc về Oguri Cap.  
 Tôi lưu lại ảnh chụp màn hình (Burp request/response, DevTools cookie, trang flag) làm bằng chứng cho hành trình này.
