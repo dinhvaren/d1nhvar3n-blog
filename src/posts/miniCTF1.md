@@ -38,69 +38,81 @@ Một trang đăng nhập hiện ra, khá đơn giản. Không có gì đặc bi
 
 Trong đầu vang lên suy nghĩ: *“Đã là CTF thì form login hiếm khi để brute-force. Chắc chắn có trick ở cookie/session.”*  
 
+
+
 Tôi bật **Burp Suite**, bật intercept và thử gửi request khi bấm login.  
 Kết quả: server trả về một **cookie lạ**.
 
 ![Burp Intercept](images/03_burp_intercept.png)
 
-Tôi copy giá trị cookie ra giấy nháp, thấy nó có dạng quen thuộc:  
+Tôi thấy rõ ràng có các giá trị như sau:
 
 ```jwt
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+Set-Cookie: PHPSESSID=9c0b94ce3efef5f2ce62ef39b15ecd0c;
+Set-Cookie: user=dinhvaren;
+Set-Cookie: role=user;
 ```
-Trong đầu tôi lóe lên: *“JWT. Chắc chắn là JWT.”*  
+Ngay lúc đó, tôi biết: trò chơi này là **cookie tampering**.
 
 ---
 
 ## 3. Giải mã bánh quy (JWT decoding)
 
-Như một thám tử đang lần theo dấu vết, tôi copy toàn bộ token,tôi đem token này lên [jwt.io](https://jwt.io/) mở jwt.io như mở một chiếc hộp bí mật, và dán token vào. Payload hiện ra trước mắt, giản dị nhưng đầy ý nghĩa.
+Tôi mở tab **Application → Cookies** trong DevTools để quan sát.  
+Ở đó, ba chiếc bánh quy nhỏ nằm ngay ngắn: `PHPSESSID`, `user`, và `role`.  
 
-Ngay lập tức, payload được decode:  
+![Burp Suite Cookies](images/04_cookies.png)
 
-```json
-{
-  "user": "guest",
-  "role": "user"
-}
+```
+PHPSESSID = 9c0b94ce3efef5f2ce62ef39b15ecd0c;
+user = dinhvaren;  
+role: = user;  
 ```
 Có một khoảnh khắc im lặng — `role` là `user`. Tôi mỉm cười nhẹ: *"Nếu bánh quy ở trong kho nhà admin, thì ta phải trở thành admin."*
 ## 4. Trò nghịch cookie (Tampering)
 
-Tôi sửa payload trên jwt.io, thay `role` thành `admin`:
+Tôi thử chỉnh giá trị cookie `role`.  
+Thay `user`, tôi đổi nó thành `admin`.  
 
-```json
-{
-  "user": "guest",
-  "role": "admin"
-}
+Trong Burp Repeater, tôi sửa trực tiếp:  
+
+
 ```
-jwt.io sinh ra một token mới. Trên góc tâm trí tôi biết: nếu server kiểm tra signature nghiêm ngặt thì trò này sẽ dừng lại ở đó. Nhưng nhiều challenge thiết kế để dạy bài học — đôi khi server lười kiểm tra alg hoặc để lộ secret. Tôi quyết định liều một nước.
+Cookie: PHPSESSID=9c0b94ce3efef5f2ce62ef39b15ecd0c;
+user=dinhvaren;
+role=admin
+```
+![Repeater Request](images/06_repeater_response.png)
 
-Quay lại Burp, đưa request vào Repeater, tìm chỗ cookie `auth=` rồi dán token mới vào. Tim tôi đập nhanh khi nhấn Go.
+Tim tôi đập nhanh khi nhấn **Go** gửi request mới.
+
 ---
+
 
 ## 5. Khám phá kho báu (Flag)
 
 Server trả về trang — và trong body, như một kho báu được mở nắp, dòng chữ kia hiện ra rõ ràng:
-```
-miniCTF{super_cookie_master}
-```
-Tôi bật cười: chiếc bánh quy ngọt ngào đã thuộc về Oguri Cap. Tôi chụp ảnh màn hình response, lưu lại Burp request/response và snapshot của jwt.io — bằng chứng cho hành trình khám phá này.
+![Flag page](images/07_flag.png)
+
+Chiếc bánh quy ngọt ngào đã thuộc về Oguri Cap.  
+Tôi lưu lại Burp request/response và ảnh cookie như minh chứng cho hành trình này.
 
 ## 6. Kết thúc câu chuyện
 
 Chiếc bánh quy cuối cùng cũng xuất hiện dưới dạng flag.  
 Tôi dựa lưng vào ghế, thở phào: một thử thách 500 điểm đã hạ gục.
 
-Từ một trang login tưởng chừng vô hại, tôi lần theo dấu vết cookie, mở khóa JWT, nghịch payload để leo quyền thành admin, và tìm ra bí mật ẩn sau.  
+Từ một trang login tưởng chừng vô hại, tôi lần theo dấu vết cookie, phát hiện server **tin tưởng role do client gửi lên**, và chỉ bằng cách sửa một giá trị nhỏ, tôi đã leo quyền thành admin để tìm ra bí mật ẩn sau.  
 
 **Bài học rút ra từ câu chuyện này:**
-- Đừng bao giờ tin tưởng dữ liệu do client gửi lên.  
-- Với JWT, luôn phải **kiểm tra chữ ký** (signature), không được để `alg: none` hoặc bỏ qua verify.  
-- Không nên lưu role/permission trong cookie mà không có integrity check.  
-- Cookie nên được cấu hình thêm `HttpOnly`, `Secure`, `SameSite` để giảm rủi ro tấn công.  
+- Đừng bao giờ tin dữ liệu do client gửi lên.  
+- Không nên lưu trực tiếp role/permission trong cookie.  
+- Nếu cần, hãy lưu role ở server-side session, không để client chỉnh được.  
+- Cookie nên có thêm flag `HttpOnly`, `Secure`, `SameSite`.
 
-Trong đời thực, một lỗi nhỏ trong xác thực có thể dẫn đến việc kẻ tấn công chiếm quyền điều khiển hệ thống.  
-Nhưng trong cuộc chơi CTF này, nó chỉ đem đến cho tôi một **chiếc bánh quy ngọt ngào mang tên flag**:
+Trong đời thực, một lỗi nhỏ thế này có thể khiến toàn bộ hệ thống bị chiếm quyền.  
+Nhưng trong cuộc chơi CTF, nó chỉ đem lại cho tôi một **chiếc bánh quy ngọt ngào mang tên flag**:
+```
+miniCTF{Sup3r_4ssm1n}
+```
 
