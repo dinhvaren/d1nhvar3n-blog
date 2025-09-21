@@ -24,52 +24,76 @@ Tìm flag có dạng `miniCTF{...}`
 
 **Flag format:**  
 ```
-miniCTF{...}
-```
-
-> **Mô tả đề bài:**  
-> “Oguri Cap đang đi tập luyện trên đường nhưng vô tình rơi vào thế giới VulnderLand.  
-> Do liên tục chạy trong nhiều giây, dần dần cô ấy cảm thấy đói và thèm bánh quy.  
-> Bạn hãy giúp cô ấy tìm được bánh quy để tiếp tục chạy nhé!”
+miniCTF{FAKE_FLAG_FAKE_FLAG}
 
 ---
 
-## 2. Phân tích đề (Recon / Analysis)
+## 2. Recon / Analysis (Phân tích đề)
 
-Mục tiêu của bước này là thu thập tất cả thông tin có thể trước khi thử khai thác.
+Mục tiêu: thu thập thông tin trước khi tấn công.
 
-### 2.1. Mở trang & kiểm tra source
-- Mở `http://103.249.117.57:4999/login.php` trong trình duyệt.  
-- Mở **DevTools → Elements / Network / Application (Cookies)** để quan sát HTML/JS, các request khi tải trang, và cookie hiện tại.
+### 2.1. Mở trang & xem giao diện (screenshot)
+- Mở `http://103.249.117.57:4999/login.php` bằng trình duyệt.
+- **Chụp màn hình** trang login (screenshot: `images/01_login.png`).
 
-### 2.2. Quan sát requests / responses
-- Bắt traffic bằng **Burp Suite** hoặc dùng **Chrome DevTools → Network**:
-  - Xem request khi submit login (method, params, headers, cookies).
-  - Xem response set-cookie header (tên cookie, giá trị, attributes `HttpOnly`, `Secure`, `Path`).
+![Screenshot 1 - Login page](images/01_login.png)  
+*Hình 1 — Trang login (chụp toàn bộ form và URL bar).*
 
-### 2.3. Kiểm tra cookie / session
-- Tên challenge là *Super Cookie* → rất đáng nghi cookie chứa logic auth (ví dụ `auth`, `session`, `user`, `role`, `token`).
-- Các dạng cookie thường gặp:
-  - **Base64-encoded JSON** (ví dụ `eyJ1c2VyIjoiYWxpY2UiLCJyb2xlIjoiVVNFUiJ9`).
-  - **JWT** (`header.payload.signature`).
-  - **PHP serialized** (`a:2:{s:4:"user";s:5:"alice";s:4:"role";s:5:"user";}`).
-  - **Signed cookie** (có HMAC / signature).
-- Nếu cookie dễ decode/modify (không có signature), ta có thể chỉnh `role` → `admin` hoặc đổi user.
+### 2.2. Kiểm tra source HTML / JS
+- Mở DevTools → Elements / Sources để tìm JS có thể set cookie hoặc fetch token.
+- **Chụp màn hình** phần code liên quan (screenshot: `images/02_source.png`).
 
-### 2.4. Dò tìm endpoint ẩn
-- Dò thêm các file/endpoint phổ biến: `/admin.php`, `/flag`, `/flag.php`, `/download.php?file=...`, `/profile.php`.
-- Dò tìm đường link trong HTML/JS (có thể bị ẩn bởi JS).
+![Screenshot 2 - Page source / JS](images/02_source.png)  
+*Hình 2 — Một ví dụ: JS đặt cookie hoặc gọi API trả token.*
+
+### 2.3. Quan sát requests / responses (Proxy)
+- Bật Burp Suite (hoặc Chrome DevTools → Network).  
+- Intercept request khi submit form login để xem header, body, Set-Cookie, Authorization.
+- **Chụp màn hình** Burp Intercept màn request (screenshot: `images/03_burp_intercept.png`).
+
+![Screenshot 3 - Burp intercept request](images/03_burp_intercept.png)  
+*Hình 3 — Burp bắt request; chú ý: cookie/token nằm ở header hoặc body.*
+
+### 2.4. Kiểm tra cookie / token
+- Mở DevTools → Application → Cookies để xem cookie hiện có (tên + giá trị + attributes).
+- Nếu cookie có dạng `header.payload.signature` → có thể là JWT.
+- **Chụp màn hình** cookie trong DevTools (screenshot: `images/04_cookies.png`).
+
+![Screenshot 4 - DevTools Cookies](images/04_cookies.png)  
+*Hình 4 — Cookie được set (ví dụ tên `auth` chứa JWT).*
+
+### 2.5. Dò tìm endpoints ẩn
+- Kiểm tra các đường dẫn phổ biến: `/admin.php`, `/flag`, `/profile.php`, `download.php?file=...`.
+- Dùng wget/curl nhẹ để kiểm tra status code các path quan trọng (không scan mạnh).
 
 ---
 
-## 3. Khai thác (Exploitation)
+## 3. Exploitation (Khai thác)
 
-Phần này trình bày các phương pháp thử nghiệm theo thứ tự hợp lý, kèm lệnh / payload (có chú thích).
+Ở ví dụ này ta giả sử token thu được là **JWT** (định dạng `header.payload.signature`) và server có thể chấp nhận token có `alg: none` hoặc server không validate signature chặt.
 
-> **Lưu ý bảo mật:** Chỉ thao tác vừa đủ để lấy flag, không thực hiện brute-force hay tấn công làm quá tải server.
+> **Quan trọng:** các bước dưới đây dùng cho môi trường CTF/peh thử nghiệm. Không dùng trên hệ thống thực tế khi không có phép.
 
-### 3.1. Xem cookie đang có (DevTools)
-Mở Console → gõ:
-```js
-document.cookie
-```
+### 3.1. Bắt gói tin với Burp (Hướng dẫn ngắn)
+1. Mở Burp → Proxy → Intercept on.  
+2. Truy cập `login.php`, submit form để Burp bắt request.  
+3. Kiểm tra request/response: tìm `Authorization: Bearer <token>` hoặc `Set-Cookie: auth=<token>` hoặc response JSON `{"token":"..."}`.
+
+**Screenshot hướng dẫn:** dùng file `images/03_burp_intercept.png` làm minh hoạ.
+
+### 3.2. Copy token (JWT) và decode trên jwt.io
+1. Mở [jwt.io](https://jwt.io/) (hoặc local tool).  
+2. Dán token vào khung Encoded — trang sẽ decode header & payload.  
+3. **Chụp màn hình** token + payload trên jwt.io (screenshot: `images/05_jwt_io.png`).
+
+![Screenshot 5 - jwt.io payload edit](images/05_jwt_io.png)  
+*Hình 5 — Payload hiện tại (ví dụ `"role": "user"`).*
+
+### 3.3. Chỉnh payload (ví dụ đổi role → admin)
+- Thay payload:
+```json
+{
+  "user":"guest",
+  "role":"admin"
+}
+
