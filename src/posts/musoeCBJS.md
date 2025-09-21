@@ -1,10 +1,8 @@
 # CBJS Lab — Musoe (Buy-the-Flag)  
-**Write-up (story mode)**
+**Write-up**
 
 > Một chuyến ghé thăm *Musoe* — nơi mọi thứ có thể được mua bán, kể cả những điều kỳ quặc nhất.  
 > Chủ đề: lỗi logic cửa hàng (client-trust), tampering request, checkout → mua được flag.
-
----
 
 ## Table of Contents
 - [1. Câu chuyện bắt đầu](#1-câu-chuyện-bắt-đầu)
@@ -14,8 +12,6 @@
 - [5. Thanh toán và nhận kho báu (Exploitation)](#5-thanh-toán-và-nhận-kho-báu-exploitation)
 - [6. Kết thúc câu chuyện (Conclusion)](#6-kết-thúc-câu-chuyện-conclusion)
 - [Appendix — Requests & Notes](#appendix--requests--notes)
-
----
 
 ## 1. Câu chuyện bắt đầu
 
@@ -29,8 +25,6 @@ https://musoe.cyberjutsu-lab.tech/
 ```
 
 Giao diện hiện ra giống một cửa hàng nhỏ: Home, Shop, Cart — nhìn rất bình thường.
-
----
 
 ## 2. Thăm dò ngôi làng (Recon)
 
@@ -55,8 +49,6 @@ Content-Type: application/json
 
 Trong đầu mình lóe lên một ý: *nếu server chấp nhận giá do client gửi, liệu mình có thể gửi item tùy ý (ví dụ "flag") với giá rẻ không?*
 
----
-
 ## 3. Cửa hàng bí mật (Analysis)
 
 Trước khi làm liều, mình thử thêm một vài thao tác khảo sát:
@@ -69,8 +61,6 @@ Một vài phát hiện:
 - Add-to-cart trả về message `Added <item> to your cart!` khi payload hợp lệ.
 - Cart có thể được xem bằng endpoint `/cart` (GET) và trả về nội dung cart hiện tại.
 - Checkout endpoint là `/cart/checkout` (POST) — mình chưa thử checkout vì muốn đảm bảo mình bỏ item "flag" vào cart trước.
-
----
 
 ## 4. Trò nghịch ngợm (Tampering)
 
@@ -99,7 +89,7 @@ GET /cart HTTP/1.1
 Host: musoe.cyberjutsu-lab.tech
 ```
 
-Response (ví dụ):
+Response:
 ```json
 {
   "cart": [
@@ -109,12 +99,9 @@ Response (ví dụ):
   "total": 6
 }
 ```
-
 Cart đã có `flag` — rõ ràng server không validate `item`/`price` kỹ lắm.
 
 > Lưu ý: một số lab thiết kế để `flag` không hiện trong shop UI nhưng server chấp nhận item nếu client gửi đúng tên — đó chính là bài học: **không tin tưởng dữ liệu client gửi**.
-
----
 
 ## 5. Thanh toán và nhận kho báu (Exploitation)
 
@@ -140,8 +127,6 @@ Hoặc định dạng khác — nhưng flag đã xuất hiện trực tiếp sau
 
 Mình chụp lại request/response, lưu bằng chứng (screenshot Burp Repeater + `/cart` JSON + flag), và copy flag vào notebook.
 
----
-
 ## 6. Kết thúc câu chuyện (Conclusion)
 
 Từ một hint “flag mua được ở shop”, mình chỉ cần:
@@ -153,8 +138,6 @@ Từ một hint “flag mua được ở shop”, mình chỉ cần:
 - Tuyệt đối **không tin tưởng dữ liệu client gửi** cho các logic tài chính/giao dịch.
 - Tất cả giá cả, quyền, status, item-sensitive phải được kiểm tra và xác thực server-side.
 - Trong môi trường thật, lỗi này có thể dẫn tới gian lận, mất mát tài chính hoặc rò rỉ dữ liệu nhạy cảm.
-
----
 
 ## Appendix — Requests & Notes
 

@@ -43,7 +43,7 @@ Kết quả: trang hiển thị một lời chào đơn giản trong phần “L
 Mục tiêu tiếp theo là quan sát request/response khi load trang. Mở **Burp → Proxy → HTTP history** và xem request GET `/` (hoặc request submit).
 
 Ở đây có 1 chi tiết rất đáng chú ý trong header:
-```
+```http
 Cookie: queen=false
 ```
 
@@ -65,13 +65,13 @@ Chiến lược an toàn để kiểm tra:
 4. Quay về trình duyệt (vẫn đi qua Burp) → bấm **Gửi cho Mad Hatter** một lần nữa.
 
 **Request before (burp history):**
-```
+```http
 GET / HTTP/1.1
 Host: 103.249.117.57:6636
 Cookie: queen=false
 ```
 **Request after (repeater):**
-```
+```http
 GET / HTTP/1.1
 Host: 103.249.117.57:6636
 Cookie: queen=true
