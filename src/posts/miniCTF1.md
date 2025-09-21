@@ -58,7 +58,7 @@ Ngay lúc đó, tôi biết: trò chơi này là **cookie tampering**.
 
 ## 3. Giải mã bánh quy (JWT decoding)
 
-Tôi mở tab **Application → Cookies** trong DevTools để quan sát.  
+Tôi mở tab **Proxy → HTTP history** trong Burp Suite để quan sát.  
 Ở đó, ba chiếc bánh quy nhỏ nằm ngay ngắn: `PHPSESSID`, `user`, và `role`.  
 
 ![Burp Suite Cookies](images/04_cookies.png)
@@ -75,8 +75,6 @@ Tôi thử chỉnh giá trị cookie `role`.
 Thay `user`, tôi đổi nó thành `admin`.  
 
 Trong Burp Repeater, tôi sửa trực tiếp:  
-
-
 ```
 Cookie: PHPSESSID=9c0b94ce3efef5f2ce62ef39b15ecd0c;
 user=dinhvaren;
