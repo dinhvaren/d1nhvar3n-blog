@@ -177,7 +177,6 @@ Mọi thứ hiển thị trong HTML/JS đều chỉ là “sân chơi” — và
 
 ## Appendix — Evidence & bước tái hiện nhanh
 
-### A. Chuỗi sự kiện chính
 1. Truy cập `http://103.249.117.57:6637/` → giao diện game Flappy Bird hiển thị.  
 2. Mở **DevTools → Network** → `GET /` → trong response thấy một “flag” giả.  
 3. Kéo xuống dòng ~65 trong response → phát hiện link tới `script.js`.  
@@ -190,8 +189,3 @@ Mọi thứ hiển thị trong HTML/JS đều chỉ là “sân chơi” — và
    updateScore(10000000000)
    ```
 > → Hàm `returntof()` được gọi → `get_flag.php` trả về flag thật.
-
-### B. Flag thu được
-```
-miniCTF{d0wn_th3_r4bb1t_h0l3_w3_g0}
-```
