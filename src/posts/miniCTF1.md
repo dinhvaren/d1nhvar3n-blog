@@ -87,3 +87,20 @@ Server trả về trang — và trong body, như một kho báu được mở n�
 miniCTF{super_cookie_master}
 ```
 Tôi bật cười: chiếc bánh quy ngọt ngào đã thuộc về Oguri Cap. Tôi chụp ảnh màn hình response, lưu lại Burp request/response và snapshot của jwt.io — bằng chứng cho hành trình khám phá này.
+
+## 6. Kết thúc câu chuyện
+
+Chiếc bánh quy cuối cùng cũng xuất hiện dưới dạng flag.  
+Tôi dựa lưng vào ghế, thở phào: một thử thách 500 điểm đã hạ gục.
+
+Từ một trang login tưởng chừng vô hại, tôi lần theo dấu vết cookie, mở khóa JWT, nghịch payload để leo quyền thành admin, và tìm ra bí mật ẩn sau.  
+
+**Bài học rút ra từ câu chuyện này:**
+- Đừng bao giờ tin tưởng dữ liệu do client gửi lên.  
+- Với JWT, luôn phải **kiểm tra chữ ký** (signature), không được để `alg: none` hoặc bỏ qua verify.  
+- Không nên lưu role/permission trong cookie mà không có integrity check.  
+- Cookie nên được cấu hình thêm `HttpOnly`, `Secure`, `SameSite` để giảm rủi ro tấn công.  
+
+Trong đời thực, một lỗi nhỏ trong xác thực có thể dẫn đến việc kẻ tấn công chiếm quyền điều khiển hệ thống.  
+Nhưng trong cuộc chơi CTF này, nó chỉ đem đến cho tôi một **chiếc bánh quy ngọt ngào mang tên flag**:
+
