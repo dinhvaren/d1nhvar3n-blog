@@ -1,5 +1,6 @@
 import miniCTF1 from "../posts/miniCTF1.md";
 import miniCTF2 from "../posts/miniCTF2.md";
+import miniCTF3 from "../posts/miniCTF3.md";
 import musoe1Lab from "../posts/musoeCBJS.md";
 import ISPminiCTF from "../assets/img/ispminictf.png";
 import ISPminiCTFLogo from "../assets/img/ispminictf2.png";
@@ -32,6 +33,15 @@ const Posts = [
     image: ISPminiCTFLogo,
     content: miniCTF2,
     route: "The-Queen's-Secret",
+  },
+  {
+    title: "Flappy Bird — Write-up (ISP MiniCTF 2025)",
+    date: "August 8, 2025",
+    description:
+      "Bài write-up theo phong cách kể chuyện cho thử thách web 'The Queen's Secret' (tham nhũng cookie → leo quyền). Bao gồm bằng chứng Burp, các bước tái hiện và bài học rút ra. ISP MiniCTF 2025. (500 điểm)",
+    image: ISPminiCTFLogo,
+    content: miniCTF3,
+    route: "Flappy-Bird",
   },
 ];
 
