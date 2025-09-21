@@ -41,7 +41,7 @@ const About = {
     title: "Get in touch.",
     description:
       "If you’d like to discuss security research, CTFs, or collaboration opportunities, feel free to reach me via email:",
-    email: "dinhvaren@gmail.com",
+    email: "dinhlnng2003@gmail.com",
     formspree: "https://formspree.io/f/mandgdqy",
   },
   home: {
