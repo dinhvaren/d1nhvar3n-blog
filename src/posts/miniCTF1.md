@@ -84,14 +84,7 @@ Tim tôi đập nhanh khi nhấn **Go** gửi request mới.
 
 Sau khi gửi request, ban đầu không thấy gì thay đổi trên trang index. Tôi nghi ngờ có thể flag nằm ở một endpoint ẩn, nên quyết định dò thêm các đường dẫn tiềm năng.
 Tôi dùng `ffuf` nhẹ để fuzz các file/endpoint phổ biến — không quét mạnh, chỉ vài từ khóa ngắn:
-```
-admin.php
-.hta
-index.php
-.htpasswd
-.htaccess
-server-status
-```
+
 ![Ffuf admin.php](../image/miniCTF/Fuzz.jpg)
 
 Kết quả cho thấy tồn tại `admin.php`. Tôi truy cập `/admin.php` bằng Burp để xem response.
