@@ -252,24 +252,49 @@ export const CaseStudyContainer = styled.div`
 `;
 
 export const CaseStudyImage = styled.div`
-    width: 60%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    max-width: 500px;
+  position: relative;   /* để text định vị theo khung này */
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 8px;
 
-    img {
-        width: 100%;
-        align-self: flex-end;
-    }
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 
-    @media (max-width: ${props => props.theme.queries.mobile}) {
-        background-color: ${props => props.theme.colors.gray};
-        width: 100%;
-        border-radius: 4px;
-        margin-bottom: 2rem;
-    }
+  /* lớp overlay để chữ nổi bật hơn */
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4); /* nền mờ */
+  }
+
+  .overlay-text {
+    position: absolute;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    z-index: 2;         /* trên overlay */
+    text-align: center;
+    padding: 1rem;
+  }
+
+  @media (max-width: ${(props) => props.theme.queries.mobile}) {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
 `;
+
+
 
 export const CaseLink = styled.a`
     ${CaseStudyImage} {
