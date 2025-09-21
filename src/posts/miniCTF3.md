@@ -17,13 +17,14 @@
 - [11. Phút giây quyết định ở dòng 127 — điều kiện mở kho](#phút-giây-quyết-định)
 - [12. Ngón tay vụt qua Console — cheat code của thám tử](#ngón-tay-console)
 - [13. Kể lại khoảnh khắc — cinematic closure](#kể-lại-khoảnh-khắc)
+- [14. Kết thúc — con chim đã hạ cánh](#14-kết-thúc--con-chim-đã-hạ-cánh)
 - [Appendix — Evidence & bước tái hiện nhanh](#appendix-evidence--bước-tái-hiện-nhanh)
 
 ## 1. Mở đầu — một buổi chiều mưa và một con chim tò mò 🐦🌧️
 
 Một ngày tôi mở challenge **Flappy Bird** (link: `http://103.249.117.57:6637/`). Màn hình chào đón rất “game”: canvas chơi ở giữa, leaderboard bên phải, dòng chữ *Tea Cups* và nút **START ADVENTURE** — giống như một trang game nhỏ được dựng để thu hút. Không có hint, chỉ có một lời thách: *Bạn có thể tìm ra bí mật ẩn trong trò chơi này không?*
 
-![cover placeholder](/images/miniCTF/TheQueenSecret/dashboard.png)
+![Dashboard - Flappy Bird challenge](/images/miniCTF/FlappyBird/dashbroad.png)
 
 Tôi nhẩm nghĩ: trong CTF, những trang dạng game thường giấu manh mối trong HTML/JS hoặc endpoints client — không phải lúc nào cũng là lỗi server phức tạp. Vì vậy, chiến thuật của tôi là: **chơi thử → bắt traffic → đọc mã client**.
 
@@ -34,15 +35,16 @@ Tò mò, tôi nhấn **START ADVENTURE** và chơi vài lượt:
 - Màn hình game hoạt động bình thường: nhân vật nhảy, tránh ống, điểm (tea cups) tăng, cuối cùng hiện “GAME OVER”.  
 - Ghi nhận: UI hiển thị số `Tea Cups` và một phần footer có chỗ dành cho “flag message” (nhưng ban đầu bị ẩn).
 
-![test placeholder](/images/miniCTF/TheQueenSecret/sendtest.png)
+![Play test - screenshot](/images/miniCTF/FlappyBird/testgame.png)
 
-Mình nhấn Play vài lần, con chim chết nhiều lần như mọi người chơi bình thường. Nhưng sau mỗi lượt, mình mở Developer Tools → Network → HTTP History để quan sát các request/response.Ở phần GET / (trang chính), trong response text có một đoạn trông giống flag (hình 3). 
+Mình nhấn Play vài lần, con chim chết nhiều lần như mọi người chơi bình thường. Nhưng sau mỗi lượt, mình mở Developer Tools → Network → HTTP History để quan sát các request/response.Ở phần GET / (trang chính), trong response text có một đoạn trông giống flag. 
 
-![test placeholder](/images/miniCTF/TheQueenSecret/sendtest.png)
+![Fake flag in GET / response](/images/miniCTF/FlappyBird/requestindex.png)
 
 > Lúc đầu mình mừng rỡ tưởng trận này nhẹ, flag hiện luôn ở `GET /` 
 > nhưng cảm giác đó nhanh chóng bị thay bằng nghi ngờ: **tại sao flag lại dễ lấy đến vậy?**
-(fake falg1)
+
+![Fake flag](/images/miniCTF/FlappyBird/fakeflag1.png)
 
 Hành động này giúp tôi xác nhận: trang có logic client-side để cập nhật điểm và hiển thị/ẩn một khu vực UI — nên rất nên kiểm tra mã JS đi kèm.
 
@@ -68,18 +70,22 @@ Mình kéo chuột xuống response của `GET /` một lần nữa, đọc từ
 
 Cảm giác giống như phát hiện một mẩu giấy gấp trong lòng sách: nhỏ, mộc, nhưng có thể chứa bí mật. Mình nhấp vào đường dẫn đó như một thám tử khẽ mở một ngăn tủ bất thường. 
 
-*nơi phát hiện `script.js` ở dòng 65*
+![Line 65 - pointer to script.js](/images/miniCTF/FlappyBird/endpontjs.png)
+> *nơi phát hiện `script.js` ở dòng 65*
 
 ## 6. `/script.js` — file trông bình thường nhưng chứa thứ "khủng"
 Truy cập `GET /script.js` và… bingo. File JavaScript không dài, nhưng ngay ở đầu có một chuỗi nhìn giống flag. Mình copy nó, tim đập nhanh — có cảm giác vừa gần vừa xa với chiến thắng. 
 
-*flag hiện trong `script.js`.*
+![Fake flag in script.js](/images/miniCTF/FlappyBird/requestjs.png)
+> *flag hiện trong `script.js`.*
 
 Nhưng trong đầu mình lại gợn một điều: **tại sao author để flag trong JS client?** Đây là web challenge nhưng flag hiển thị công khai trên client — giống như chủ nhà để chìa khóa dưới thảm chào khách. Hiền lành quá, hoặc là... *cái bẫy đang chờ.*
 
 ## 7. Kiểm tra định dạng — flag hay là mồi?
 
 Mình không nộp ngay. Thứ nhất vì đã trải nghiệm lần trước: flag “trong trang” hóa ra là fake. Thứ hai vì có một quy ước nhỏ mà mình luôn nhớ: mọi flag chính thức trong cuộc thi này bắt đầu bằng miniCTF{...}. Nhưng flag mình tìm thấy trong `script.js` bắt đầu bằng `minCTF{...}` — thiếu một chữ `i`. Một lỗi chính tả? Hay cố tình?
+
+![Fake flag 2](/images/miniCTF/FlappyBird/fakeflag2.png)
 
 Cảm giác lạnh lạnh rồi: đây lại là một fake flag — tinh tế hơn, đánh vào mắt người chơi vội vàng. (Hình 7 minh họa sự khác biệt: `miniCTF{...}` vs `minCTF{...}`.)
 
@@ -113,18 +119,25 @@ Mình viết ra checklist để lần theo dấu vết — đây là thứ mình
 ### 7. So sánh fake vs thật
 - Lưu mọi bằng chứng: screenshot, response bodies, timestamps để đưa vào write-up cuối cùng.
 
-## 10. Bí mật hiện ra ở dòng 94 — một hàm lặng lẽ gọi get_flag.php (hình 8)
+## 10. Bí mật hiện ra ở dòng 94 — một hàm lặng lẽ gọi get_flag.php
 Tôi kéo tiếp xuống, đọc `script.js` như đọc một bức thư rải rác mã. Ở dòng 94 xuất hiện một hàm có tên `returntof()` — ngắn gọn, nhưng hành động của nó lại to như sấm: hàm này dùng **Fetch API** để gọi `get_flag.php`. Logic rất đơn giản và lạnh lùng:
 
 - Gọi `fetch('get_flag.php')`.
 - Nếu `response.ok` thì `response.text()` → gán vào `#flagContainer` và `console.log` ra một chuỗi mà trông rất giống flag.
 
 Một chi tiết nhỏ nhưng quan trọng: **flag được trả trực tiếp từ endpoint `get_flag.php` nếu được gọi đúng cách**. Đây không còn là mồi tinh vi nữa — đây là cánh cửa — chỉ cần ai đó biết cách gõ đúng thì cửa mở. 
-Hình 8 chụp đoạn code này, với dòng gọi `fetch` làm mình giật mình: “Ồ, vậy là server có flag thật, vấn đề chỉ là khi nào nó chịu trả.”
+
+![script.js - returntof() fetch get_flag.php](/images/miniCTF/FlappyBird/codejs94.png)
+
+Với dòng gọi `fetch` làm mình giật mình: “Ồ, vậy là server có flag thật, vấn đề chỉ là khi nào nó chịu trả.”
 
 ## 11. Phút giây quyết định ở dòng 127 — điều kiện mở kho
 
-Tiếp tục cuộn, đến dòng 127 tôi thấy một hàm khác xử lý điểm số: hàm nhận tham số `newScore`. Trong hàm này có điều kiện kỳ lạ:
+Tiếp tục cuộn, đến dòng 127 tôi thấy một hàm khác xử lý điểm số: hàm nhận tham số `newScore`. 
+
+![script.js - updateScore condition](/images/miniCTF/FlappyBird/codejs127.png)
+
+Trong hàm này có điều kiện kỳ lạ:
 ```js
 if (newScore >= 10000000000) {
     returntof();
@@ -142,7 +155,11 @@ Tôi mở **DevTools → Console**, gõ mạnh vào như gõ một mật khẩu 
 ```js
 updateScore(10000000000)
 ```
-Bùm. Màn hình như nổ tung. `returntof()` được gọi, `fetch('get_flag.php')` trả về, và ngay lập tức flag sáng lên ở `#flagContainer` và trong console. Dòng chữ tôi mong đợi hiện ra rành rọt:
+Bùm. Màn hình như nổ tung. `returntof()` được gọi, `fetch('get_flag.php')` trả về, và ngay lập tức flag sáng lên ở `#flagContainer` và trong console. 
+
+![Console - flag revealed](/images/miniCTF/FlappyBird/payload.png)
+
+Dòng chữ tôi mong đợi hiện ra rành rọt:
 ```
 miniCTF{d0wn_th3_r4bb1t_h0l3_w3_g0}
 ```
@@ -189,3 +206,13 @@ Mọi thứ hiển thị trong HTML/JS đều chỉ là “sân chơi” — và
    updateScore(10000000000)
    ```
 > → Hàm `returntof()` được gọi → `get_flag.php` trả về flag thật.
+
+### Bài học bảo mật
+
+- **Đừng để secret ở client:** Mọi dữ liệu trong HTML/JS đều có thể bị đọc, sửa hoặc gọi trực tiếp qua Console.  
+- **Không kiểm tra điều kiện trên client:** Việc đặt rào cản “score >= 10 tỷ” chỉ là hình thức. Người chơi luôn có thể gọi trực tiếp hàm JavaScript.  
+- **Luôn xác thực ở server-side:** Nếu muốn gắn flag với điều kiện gameplay, hãy để server tính toán và trả về, thay vì cho client quyết định.  
+- **Fake flag chỉ là gia vị:** Có thể dùng để đánh lạc hướng, nhưng cần rõ ràng rằng flag thật luôn được bảo vệ bởi logic an toàn hơn.  
+
+Kết lại, challenge “Flappy Bird” là một ví dụ thú vị để nhắc nhở: **đừng bao giờ tin vào client-side**.  
+
