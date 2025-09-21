@@ -8,7 +8,7 @@
 ## Table of Contents
 - [1. Câu chuyện bắt đầu](#1-câu-chuyện-bắt-đầu)
 - [2. Bước vào mê cung (Recon)](#2-bước-vào-mê-cung-recon)
-- [3. Giải mã bánh quy (JWT decoding)](#3-giải-mã-bánh-quy-jwt-decoding)
+- [3. Giải mã bánh quy (Cookie decoding)](#3-giải-mã-bánh-quy-cookie-decoding)
 - [4. Trò nghịch cookie (Tampering)](#4-trò-nghịch-cookie-tampering)
 - [5. Khám phá kho báu (Flag)](#5-khám-phá-kho-báu-flag)
 - [6. Kết thúc câu chuyện](#6-kết-thúc-câu-chuyện)
@@ -114,4 +114,14 @@ Nhưng trong cuộc chơi CTF, nó chỉ đem lại cho tôi một **chiếc bá
 ```
 miniCTF{Sup3r_4ssm1n}
 ```
+---
 
+## Appendix — Quick Steps
+
+1. Login → Burp Intercept → xem cookie set (`user`, `role`).  
+2. Phát hiện `role=adm`.  
+3. Sửa cookie thành `role=admin`.  
+4. Gửi lại request → truy cập được trang admin.  
+5. Copy flag.
+
+---
