@@ -8,7 +8,7 @@ const HomeProjects = () => {
         <BodyContainer>
             <Container top={6}>
                 <Container leftAlign bottom={4}>
-                    <h2>Featured Articles</h2>
+                    <h2>Insights & Stories</h2>
                 </Container>
                 {Posts.map((project) => {
                     return (
