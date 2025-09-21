@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.js": "/static/js/main.c8d5ef87.chunk.js",
-    "main.js.map": "/static/js/main.c8d5ef87.chunk.js.map",
+    "main.js": "/static/js/main.d86d701d.chunk.js",
+    "main.js.map": "/static/js/main.d86d701d.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.75ebd66a.js",
     "runtime-main.js.map": "/static/js/runtime-main.75ebd66a.js.map",
     "static/js/2.4a7e204f.chunk.js": "/static/js/2.4a7e204f.chunk.js",
     "static/js/2.4a7e204f.chunk.js.map": "/static/js/2.4a7e204f.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.f1b93951134104f6a6de4dfb043fa9b3.js": "/precache-manifest.f1b93951134104f6a6de4dfb043fa9b3.js",
+    "precache-manifest.e1dc56be11137ac97c34313fa9be821e.js": "/precache-manifest.e1dc56be11137ac97c34313fa9be821e.js",
     "service-worker.js": "/service-worker.js",
     "static/js/2.4a7e204f.chunk.js.LICENSE.txt": "/static/js/2.4a7e204f.chunk.js.LICENSE.txt",
     "static/media/ispminictf.png": "/static/media/ispminictf.37e93497.png",
-    "static/media/miniCTF1.md": "/static/media/miniCTF1.359a9067.md"
+    "static/media/miniCTF1.md": "/static/media/miniCTF1.800728d9.md"
   },
   "entrypoints": [
     "static/js/runtime-main.75ebd66a.js",
     "static/js/2.4a7e204f.chunk.js",
-    "static/js/main.c8d5ef87.chunk.js"
+    "static/js/main.d86d701d.chunk.js"
   ]
 }
