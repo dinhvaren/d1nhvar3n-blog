@@ -64,10 +64,10 @@ Ngay lập tức, payload được decode:
   "role": "user"
 }
 ```
-Có một khoảnh khắc im lặng — role là user. Tôi mỉm cười nhẹ: “Nếu bánh quy ở trong kho nhà admin, thì ta phải trở thành admin.”
+Có một khoảnh khắc im lặng — `role` là `user`. Tôi mỉm cười nhẹ: *"Nếu bánh quy ở trong kho nhà admin, thì ta phải trở thành admin."*
 ## 4. Trò nghịch cookie (Tampering)
 
-Tôi sửa payload trên jwt.io, thay role thành admin:
+Tôi sửa payload trên jwt.io, thay `role` thành `admin`:
 
 ```json
 {
@@ -77,7 +77,7 @@ Tôi sửa payload trên jwt.io, thay role thành admin:
 ```
 jwt.io sinh ra một token mới. Trên góc tâm trí tôi biết: nếu server kiểm tra signature nghiêm ngặt thì trò này sẽ dừng lại ở đó. Nhưng nhiều challenge thiết kế để dạy bài học — đôi khi server lười kiểm tra alg hoặc để lộ secret. Tôi quyết định liều một nước.
 
-Quay lại Burp, đưa request vào Repeater, tìm chỗ cookie auth= rồi dán token mới vào. Tim tôi đập nhanh khi nhấn Go.
+Quay lại Burp, đưa request vào Repeater, tìm chỗ cookie `auth=` rồi dán token mới vào. Tim tôi đập nhanh khi nhấn Go.
 ---
 
 ## 5. Khám phá kho báu (Flag)
