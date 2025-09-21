@@ -155,6 +155,17 @@ export const GlobalStyle = createGlobalStyle`
       font-size: 0.9em;
       line-height: 1.6;
     }
+/* underline cho link trong markdown */
+    .markdown-body a {
+      color: #58a6ff;              /* xanh link */
+      text-decoration: underline;  /* gạch chân */
+      text-underline-offset: 3px;  /* khoảng cách giữa chữ và gạch chân */
+    }
+
+    .markdown-body a:hover {
+      color: #79c0ff;              /* hover sáng hơn */
+      text-decoration-thickness: 2px; /* gạch chân đậm hơn khi hover */
+    }
 `;
 
 export const Button = styled.button`
