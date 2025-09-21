@@ -37,6 +37,7 @@ Tò mò, tôi nhấn **START ADVENTURE** và chơi vài lượt:
 ![test placeholder](/images/miniCTF/TheQueenSecret/sendtest.png)
 
 Mình nhấn Play vài lần, con chim chết nhiều lần như mọi người chơi bình thường. Nhưng sau mỗi lượt, mình mở Developer Tools → Network → HTTP History để quan sát các request/response.Ở phần GET / (trang chính), trong response text có một đoạn trông giống flag (hình 3). 
+
 ![test placeholder](/images/miniCTF/TheQueenSecret/sendtest.png)
 
 > Lúc đầu mình mừng rỡ tưởng trận này nhẹ, flag hiện luôn ở `GET /` 
@@ -154,6 +155,25 @@ Cảm giác — một nửa là thỏa mãn, một nửa là tội lỗi tinh t�
 Đèn trên bàn bật tắt, tiếng mưa ngoài cửa nhỏ lại. Tôi ngồi im một lát, nhìn dòng flag trong console như một câu trả lời cho sự tò mò: cái này là thật. Cả hành trình, từ giao diện Flappy Bird ngây thơ → fake flag lừa nhanh ở HTML → fake flag biến âm ở `script.js` → đến flag thật được khóa sau điều kiện score — tất cả tạo nên một câu chuyện có cao trào và cú twist.
 
 Tác giả đã dựng một kịch bản: mồi giả để thử phản xạ, câu đố client-side để đo trình — và cuối cùng là một cửa hậu cho những ai chịu đào sâu. Mình lý giải: họ muốn phân biệt người chơi “copy-paste” và người chịu debug, nhưng quên rằng client-side không bao giờ là rào chắn an toàn.
+
+## 14. Kết thúc — con chim đã hạ cánh
+
+Sau cả hành trình:
+- Từ fake flag trong HTML,
+- Đến fake flag biến dạng trong `script.js`,
+- Rồi điều kiện vô lý ở score 10 tỷ,
+- Cuối cùng là “cheat code” qua DevTools Console,
+
+tôi đã lấy được flag thật:
+```
+miniCTF{d0wn_th3_r4bb1t_h0l3_w3_g0}
+```
+
+Câu chuyện Flappy Bird khép lại như một minh họa rõ ràng: **đặt niềm tin vào client-side là một sai lầm**.  
+Trong thế giới thật, bất cứ logic nào để bảo vệ secret/flag phải được xử lý server-side.  
+Mọi thứ hiển thị trong HTML/JS đều chỉ là “sân chơi” — và người chơi luôn có quyền gian lận.  
+
+> Con chim nhỏ cuối cùng cũng đã hạ cánh. Trò chơi kết thúc. Flag nằm gọn trong tay.
 
 ## Appendix — Evidence & bước tái hiện nhanh
 
