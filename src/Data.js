@@ -53,7 +53,7 @@ const About = {
   social: {
     linkedin: "dinhvaren",
     github: "dinhvaren",
-    facebook: "dvr.official.2203",
+    facebook: "dvr.2203",
   },
 };
 
