@@ -1,8 +1,7 @@
 # XXE (XML External Entity)
 
-**XXE (XML External Entity)** là lỗ hổng khi parser XML cho phép xử lý các thực thể (entity) bên ngoài (external entities) — kẻ tấn công có thể lợi dụng để đọc file cục bộ, SSRF, thực hiện Remote File Inclusion, hoặc làm OOB (out-of-band) exfiltration nếu parser tải và xử lý nội dung bên ngoài.
+**XXE (XML External Entity)** là lỗ hổng khi parser XML cho phép xử lý các entity bên ngoài — kẻ tấn công có thể lợi dụng để đọc file cục bộ, SSRF, thực hiện Remote File Inclusion, hoặc làm OOB (out-of-band) exfiltration nếu parser tải và xử lý nội dung bên ngoài.
 
----
 
 # 1) Cơ chế & ý tưởng
 
@@ -14,22 +13,21 @@
 # 2) Các dạng XXE (phổ biến)
 
 1. **In-band (Direct) Local File Disclosure**
-
    * Parser đọc file cục bộ và trả nội dung trong response.
+   
 2. **SSRF / Remote Resource Fetch**
-
    * External entity trỏ đến URL ([http://intranet/](http://intranet/)...) → server request tới internal service.
+
 3. **Out-of-band (OOB) Exfiltration**
-
    * Entity trỏ tới attacker-controlled server (DNS/HTTP) để exfil dữ liệu (thường dùng khi response không hiển thị nội dung).
+
 4. **Blind XXE / Time-based**
-
    * Không có response trực tiếp; dùng side-effects hoặc timing để dò.
+
 5. **Billion Laughs / XML Entity Expansion (XXE variant / DoS)**
-
    * Lợi dụng nested entities (entity expansion) để làm exhaustion memory/CPU (a.k.a. XML bomb) — gây DoS.
-6. **XXE kết hợp với SSRF/SSRF to RCE**
 
+6. **XXE kết hợp với SSRF/SSRF to RCE**
    * Khi server có endpoint thực thi hoặc parser có lỗ hổng bổ sung.
 
 

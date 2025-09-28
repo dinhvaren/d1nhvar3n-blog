@@ -1,32 +1,30 @@
 # 1) Định nghĩa ngắn
 
-**SQL Injection (SQLi)** là lỗi do ứng dụng chèn (concatenate) dữ liệu đầu vào không tin cậy trực tiếp vào câu lệnh SQL, cho phép attacker thay đổi cấu trúc truy vấn và đọc/sửa/xóa dữ liệu, hoặc thậm chí chạy lệnh hệ điều hành (tuỳ DB/driver).
+**SQL Injection (SQLi)** là lỗi do ứng dụng chèn dữ liệu không đáng tin cậy trực tiếp vào query, cho phép attacker thay đổi cấu trúc truy vấn và đọc/sửa/xóa dữ liệu, hoặc thậm chí chạy lệnh RCE.
 
 
 # 2) Các dạng chính (với ý tưởng cơ bản)
 
 1. **Error-based SQLi**
+   * Kích thích DB trả lỗi chứa dữ liệu để rút thông tin.
 
-   * Kích thích DB trả lỗi chứa dữ liệu (vd: `UNION`/cast gây lỗi) để rút thông tin.
 2. **Union-based SQLi**
-
    * Dùng `UNION SELECT` để nối kết quả do attacker kiểm soát vào kết quả hợp lệ.
+
 3. **Boolean-based (Blind) SQLi**
+   * Khi attacker chèn biểu thức trả về TRUE/FALSE vào tham số (ví dụ `id=1 AND 1=1` vs `id=1 AND 1=2`) và suy ra dữ liệu từ sự khác biệt trong phản hồi. Khắc phục bằng prepared statements, whitelist input và giảm quyền DB.
 
-   * Kiểm tra điều kiện true/false bằng cách quan sát khác biệt (content, status) — không có lỗi/nhãn rõ.
 4. **Time-based (Blind) SQLi**
+   * Kỹ thuật khiến DB ngủ (ví dụ SLEEP(5) hoặc pg_sleep(5)) khi một điều kiện đúng, rồi đo thời gian phản hồi để dò dữ liệu; khắc phục bằng prepared statements, validate input và giới hạn/quyền DB.
 
-   * Dùng hàm sleep/delay (`SLEEP(5)`, `pg_sleep(5)`) để đo thời gian phản hồi và dò dữ liệu bit-by-bit.
-5. **Stacked queries** (nhiều DBMS hỗ trợ: MS SQL)
+5. **Stacked queries**
+   * Chèn nhiều câu SQL trong một request (ví dụ ; DROP TABLE users;) có thể gây xóa dữ liệu hoặc RCE; ngăn bằng prepared statements, tắt multi-statement client option và giới hạn quyền DB.
 
-   * Gửi nhiều câu lệnh trong một request (`; DROP TABLE ...`) — nhiều DB forbid điều này trong prepared statements.
 6. **Out-of-band (OOB) SQLi**
+   * Kỹ thuật khiến DB gửi request ra ngoài (DNS/HTTP) để exfiltrate dữ liệu — phòng ngừa bằng egress filtering, vô hiệu hoá hàm mạng trên DB, least-privilege và chuẩn hoá/parametrize queries.
 
-   * Khi DB có thể thực hiện request bên ngoài (DNS/HTTP) để exfiltrate dữ liệu.
 7. **Second-order SQLi**
-
-   * Dữ liệu độc hại được lưu trước (ví dụ trong DB), sau đó được sử dụng không lọc ở điểm sau, gây injection.
-
+   * Xảy ra khi payload độc hại được lưu trước rồi kích hoạt sau khi app dùng lại dữ liệu ấy trong một câu SQL không an toàn, gây injection.
 
 # 3) Cách nhận biết / test nhanh (manual)
 

@@ -1,12 +1,9 @@
 # 1) SSRF là gì — tóm tắt
 
-**Server-Side Request Forgery (SSRF)** là lỗi khi ứng dụng cho phép user kiểm soát URL/host mà server sẽ gọi (ví dụ fetch URL, webhook, image loader, URL preview). Kẻ tấn công lợi dụng để ép server thực hiện request tới dịch vụ nội bộ hoặc bên ngoài thay mặt server, dẫn tới lộ dữ liệu nội bộ, SSRF→SSRF chaining, SSRF→RCE hoặc SSRF→SSO token leak (ví dụ metadata services).
+**Server-Side Request Forgery (SSRF)** là lỗi khi ứng dụng cho phép user kiểm soát URL/host mà server sẽ gọi. Kẻ tấn công lợi dụng để ép server thực hiện request tới dịch vụ nội bộ hoặc bên ngoài thay mặt server, dẫn tới lộ dữ liệu nội bộ, SSRF→SSRF chaining, SSRF→RCE hoặc SSRF→SSO token leak.
 
 
 # 2) Phân loại SSRF & ví dụ cho mỗi loại
-
-Mình trình bày theo *hành vi / vector* — mỗi mục có ví dụ payload (lab-only) và giải thích.
-
 
 ## A. Basic SSRF (Reflected / In-band)
 

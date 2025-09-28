@@ -4,9 +4,6 @@
 * **HTML Injection**: attacker được phép đưa vào chuỗi HTML (ví dụ `<b>`, `<img>`, `<script>`), làm thay đổi layout hoặc hiển thị nội dung không mong muốn. Không nhất thiết chứa mã JS — có thể chỉ là chèn markup.
 * **XSS (Cross-Site Scripting)**: một dạng HTML Injection **khi attacker có thể chèn mã JavaScript** hoặc tạo điều kiện để mã độc thực thi trong trình duyệt nạn nhân. Mục tiêu thường là đánh cắp cookie/session, CSRF nâng cao, DOM tampering, redirect, keylogger, crypto-jacking, v.v.
 
-Sơ đồ ngắn:
-Input không an toàn → được render trong HTML/attribute/JS/URL → mã attacker chạy => XSS.
-
 # Các dạng XSS (chi tiết, cách nhận biết & ví dụ)
 
 ## 1) Reflected XSS (Non-persistent)

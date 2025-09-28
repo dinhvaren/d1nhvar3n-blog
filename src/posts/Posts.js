@@ -3,6 +3,7 @@ import miniCTF2 from "../posts/miniCTF2.md";
 import miniCTF3 from "../posts/miniCTF3.md";
 import sqli from "../posts/sqli.md";
 import ssrf from "../posts/ssrf.md";
+import ssti from "../posts/ssti.md";
 import Top10OWASP from "../posts/Top10-OWASP.md";
 import xxe from "../posts/xxe.md";
 import htmli from "../posts/htmli.md";
@@ -118,6 +119,14 @@ const Posts = [
     image: top10Logo,
     content: nosqli,
     route: "NoSQL-Injection",
+  },
+    {
+    title: "Server-Side Template Injection (SSTI)",
+    date: "Jun 20, 2025",
+    description: "Lỗ hổng khi server render template từ input người dùng (Jinja2/Twig/ERB, ...), cho phép chèn biểu thức/object trong template để leak thông tin hoặc thực thi mã (RCE). Bao gồm payload detect phổ biến, dấu hiệu nhận biết và biện pháp phòng ngừa (không render template do user cung cấp, bật autoescape, sandbox, validate/whitelist input).",
+    image: top10Logo,
+    content: ssti,
+    route: "Server-Side Template Injection",
   },
 ];
 

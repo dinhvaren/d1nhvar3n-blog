@@ -2,9 +2,7 @@
 
 ## 1. Định nghĩa ngắn
 
-**NoSQL Injection** là lỗi tương tự SQLi nhưng xảy ra trên các cơ sở dữ liệu NoSQL (MongoDB, CouchDB, Redis, Cassandra, v.v.) khi ứng dụng cho phép đầu vào không tin cậy ảnh hưởng trực tiếp đến cấu trúc truy vấn của DB NoSQL, cho phép attacker thao túng truy vấn, đọc/ghi/xoá dữ liệu hoặc thực thi mã tuỳ nền tảng.
-
-NoSQL thường dùng document/JSON-like queries — nên vector tấn công khác SQL truyền thống; nhiều payload lợi dụng toán tử (`$ne`, `$gt`, `$where`, `$regex`, `$exists`, v.v.) hoặc kiểu dữ liệu/đối tượng (object injection) để bypass xác thực.
+**NoSQL Injection** là lỗi xảy ra trên các cơ sở dữ liệu NoSQL (MongoDB, CouchDB, Redis, Cassandra, …) khi ứng dụng cho phép chèn dữ liệu không tin cậy mà ảnh hưởng trực tiếp tới cấu trúc truy vấn của DB NoSQL, cho phép attacker thao túng truy vấn để đọc/ghi/xóa dữ liệu hoặc thực thi mã (tuỳ hệ). NoSQL thường dùng truy vấn dạng document / JSON-like, nên vector tấn công khác SQL cổ điển — attacker lợi dụng các toán tử ($ne, $gt, $where, $regex, $exists, ...) hoặc object injection.
 
 
 ## 2. Vì sao NoSQLi thường bị bỏ qua

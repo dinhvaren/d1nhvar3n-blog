@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/static/js/main.324ddd47.chunk.js",
-    "main.js.map": "/static/js/main.324ddd47.chunk.js.map",
+    "main.js": "/static/js/main.091ce77a.chunk.js",
+    "main.js.map": "/static/js/main.091ce77a.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.75ebd66a.js",
     "runtime-main.js.map": "/static/js/runtime-main.75ebd66a.js.map",
-    "static/js/2.ba8a9bf7.chunk.js": "/static/js/2.ba8a9bf7.chunk.js",
-    "static/js/2.ba8a9bf7.chunk.js.map": "/static/js/2.ba8a9bf7.chunk.js.map",
+    "static/js/2.57fb8345.chunk.js": "/static/js/2.57fb8345.chunk.js",
+    "static/js/2.57fb8345.chunk.js.map": "/static/js/2.57fb8345.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.7f98a5b36c0717114493bad9e98ce849.js": "/precache-manifest.7f98a5b36c0717114493bad9e98ce849.js",
+    "precache-manifest.d764bdb0e1c93d750e77635ad16f845f.js": "/precache-manifest.d764bdb0e1c93d750e77635ad16f845f.js",
     "service-worker.js": "/service-worker.js",
-    "static/js/2.ba8a9bf7.chunk.js.LICENSE.txt": "/static/js/2.ba8a9bf7.chunk.js.LICENSE.txt",
+    "static/js/2.57fb8345.chunk.js.LICENSE.txt": "/static/js/2.57fb8345.chunk.js.LICENSE.txt",
     "static/media/CBJSBlog.md": "/static/media/CBJSBlog.f6582227.md",
     "static/media/Top10-OWASP.md": "/static/media/Top10-OWASP.1cd1d100.md",
     "static/media/cbjs.png": "/static/media/cbjs.7494e916.png",
-    "static/media/htmli.md": "/static/media/htmli.5b390326.md",
+    "static/media/htmli.md": "/static/media/htmli.d5b21d9d.md",
     "static/media/idor-lfi-rce.md": "/static/media/idor-lfi-rce.60abd449.md",
     "static/media/ispminictf.png": "/static/media/ispminictf.37e93497.png",
     "static/media/ispminictf2.png": "/static/media/ispminictf2.c322028c.png",
@@ -21,15 +21,16 @@
     "static/media/miniCTF2.md": "/static/media/miniCTF2.5f5f1252.md",
     "static/media/miniCTF3.md": "/static/media/miniCTF3.97c9bf5b.md",
     "static/media/musoeCBJS.md": "/static/media/musoeCBJS.a13f370d.md",
-    "static/media/nosqli.md": "/static/media/nosqli.1f0aacc2.md",
+    "static/media/nosqli.md": "/static/media/nosqli.f9ad010c.md",
     "static/media/owasp-top-ten-1000.png": "/static/media/owasp-top-ten-1000.a046f768.png",
-    "static/media/sqli.md": "/static/media/sqli.e1033374.md",
-    "static/media/ssrf.md": "/static/media/ssrf.c0718659.md",
-    "static/media/xxe.md": "/static/media/xxe.4215ad59.md"
+    "static/media/sqli.md": "/static/media/sqli.4d9f7d52.md",
+    "static/media/ssrf.md": "/static/media/ssrf.5f140ced.md",
+    "static/media/ssti.md": "/static/media/ssti.5b9cf935.md",
+    "static/media/xxe.md": "/static/media/xxe.aa1166fd.md"
   },
   "entrypoints": [
     "static/js/runtime-main.75ebd66a.js",
-    "static/js/2.ba8a9bf7.chunk.js",
-    "static/js/main.324ddd47.chunk.js"
+    "static/js/2.57fb8345.chunk.js",
+    "static/js/main.091ce77a.chunk.js"
   ]
 }
