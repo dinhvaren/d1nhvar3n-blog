@@ -4,16 +4,16 @@ Một mẫu blog cá nhân sử dụng React + Markdown — dễ dàng mở rộ
 
 ## 🔍 Giới thiệu
 
-* Demo: [d1nhvar3n-blog.io.vn](https://d1nhvar3n-blog.io.vn) ([GitHub][1])
-* Đây là template blog dùng React (Create React App), styled-components, và nội dung bài viết được viết dưới dạng Markdown. ([GitHub][1])
+* Demo: [d1nhvar3n-blog.io.vn](https://d1nhvar3n-blog.io.vn)
+* Đây là template blog dùng React (Create React App), styled-components, và nội dung bài viết được viết dưới dạng Markdown.
 * Mục đích: để bạn dễ dàng tạo blog cá nhân mà không cần xây dựng từ đầu — chỉ cần viết bài dưới dạng `.md`, cấu hình Posts, và deploy.
 
 ## 🧰 Công nghệ sử dụng
 
-* React (Create React App) ([GitHub][1])
-* styled-components ([GitHub][1])
-* Markdown để viết nội dung bài viết ([GitHub][1])
-* Triển khai (deployment): Netlify ([GitHub][1])
+* React (Create React App)
+* styled-components
+* Markdown để viết nội dung bài viết
+* Triển khai (deployment): Netlify
 
 ## 🚀 Cách chạy project
 
@@ -38,12 +38,12 @@ Một mẫu blog cá nhân sử dụng React + Markdown — dễ dàng mở rộ
    # hoặc npm start
    ```
 
-   Sau đó mở `http://localhost:3000` để xem blog của bạn. ([GitHub][1])
+   Sau đó mở `http://localhost:3000` để xem blog của bạn.
 
 ## ✍️ Thêm bài viết mới (Markdown)
 
-1. Tạo file Markdown mới: ví dụ `posts/ten-bai-viet.md` ([GitHub][1])
-2. Mở file `src/Posts.js`, thêm thông tin bài viết (route, tiêu đề, đường dẫn file `.md`) để blog tự sinh trang cho nó ([GitHub][1])
+1. Tạo file Markdown mới: ví dụ `posts/ten-bai-viet.md`
+2. Mở file `src/Posts.js`, thêm thông tin bài viết (route, tiêu đề, đường dẫn file `.md`) để blog tự sinh trang cho nó
 3. Khởi động lại app (nếu cần) để xem bài viết hiển thị.
 
 ## 📂 Cấu trúc thư mục (tóm gọn)
