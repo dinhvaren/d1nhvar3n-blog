@@ -23,7 +23,7 @@ class Navigation extends React.Component {
                 <SubNavMenuList>
                   <SubNavMenuListItem active={page === "about" ? true : false}>
                     <a
-                      href="https://dinhvaren.id.vn/"
+                      href="https://dinhvaren.io.vn/"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
