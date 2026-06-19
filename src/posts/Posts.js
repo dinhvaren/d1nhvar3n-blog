@@ -18,6 +18,15 @@ import CbjsLogo from "../assets/img/cbjs.png";
 
 const Posts = [
   {
+    title: "FreshShop — CVE-2026-33937 Write-up",
+    date: "Jun 19, 2026",
+    description:
+      "Phân tích lỗ hổng Handlebars AST Injection dẫn tới RCE trên FreshShop Lab. Bao gồm kiểm tra template rendering, khai thác NumberLiteral.value và xác nhận thực thi lệnh trên server.",
+    image: FreshShopLogo,
+    content: freshshopLab,
+    route: "freshshop-cve-2026-33937",
+  },
+  {
     title: "Musoe 01 — Write-up (Cyberjutsu 2025)",
     date: "Sep 17, 2025",
     description:
@@ -83,7 +92,8 @@ const Posts = [
   {
     title: "OWASP Top 10",
     date: "Jun 20, 2025",
-    description: "Tóm tắt OWASP Top 10 (2021) — định nghĩa từng mục, ví dụ thực tế và cách khắc phục ngắn gọn; cheat-sheet tiện ôn phỏng vấn cho pentester/dev-sec. ",
+    description:
+      "Tóm tắt OWASP Top 10 (2021) — định nghĩa từng mục, ví dụ thực tế và cách khắc phục ngắn gọn; cheat-sheet tiện ôn phỏng vấn cho pentester/dev-sec. ",
     image: top10Logo,
     content: Top10OWASP,
     route: "Top10OWASP",
@@ -91,7 +101,8 @@ const Posts = [
   {
     title: "XXE (XML External Entity)",
     date: "Jun 20, 2025",
-    description: "cách hoạt động của external entity, ví dụ in-band/OOB/billion-laughs, test lab và cách cấu hình parser an toàn (Java/Python/.NET).",
+    description:
+      "cách hoạt động của external entity, ví dụ in-band/OOB/billion-laughs, test lab và cách cấu hình parser an toàn (Java/Python/.NET).",
     image: top10Logo,
     content: xxe,
     route: "XML-External-Entity",
@@ -99,7 +110,8 @@ const Posts = [
   {
     title: "HTML Injection & XSS",
     date: "Jun 20, 2025",
-    description: "phân loại (reflected/stored/DOM), context-aware escaping, payload mẫu và defensive coding (escape theo context, DOMPurify, CSP).",
+    description:
+      "phân loại (reflected/stored/DOM), context-aware escaping, payload mẫu và defensive coding (escape theo context, DOMPurify, CSP).",
     image: top10Logo,
     content: htmli,
     route: "html-injection",
@@ -107,7 +119,8 @@ const Posts = [
   {
     title: "IDOR, LFI & RCE",
     date: "Jun 20, 2025",
-    description: "cơ chế từng loại, ví dụ vulnerable (PHP/Node), cách dò, chuỗi tấn công có thể dẫn tới RCE và checklist fix nhanh.",
+    description:
+      "cơ chế từng loại, ví dụ vulnerable (PHP/Node), cách dò, chuỗi tấn công có thể dẫn tới RCE và checklist fix nhanh.",
     image: top10Logo,
     content: idor_lfi_rce,
     route: "idor-lfi-rce",
@@ -115,15 +128,17 @@ const Posts = [
   {
     title: "NoSQL Injection",
     date: "Jun 20, 2025",
-    description: "operator/object injection, ví dụ PHP/Node, payload phổ biến (`$ne`, `$regex`), cách dò và biện pháp phòng (sanitize, cast, schema validation).",
+    description:
+      "operator/object injection, ví dụ PHP/Node, payload phổ biến (`$ne`, `$regex`), cách dò và biện pháp phòng (sanitize, cast, schema validation).",
     image: top10Logo,
     content: nosqli,
     route: "NoSQL-Injection",
   },
-    {
+  {
     title: "Server-Side Template Injection (SSTI)",
     date: "Jun 20, 2025",
-    description: "Lỗ hổng khi server render template từ input người dùng (Jinja2/Twig/ERB, ...), cho phép chèn biểu thức/object trong template để leak thông tin hoặc thực thi mã (RCE). Bao gồm payload detect phổ biến, dấu hiệu nhận biết và biện pháp phòng ngừa (không render template do user cung cấp, bật autoescape, sandbox, validate/whitelist input).",
+    description:
+      "Lỗ hổng khi server render template từ input người dùng (Jinja2/Twig/ERB, ...), cho phép chèn biểu thức/object trong template để leak thông tin hoặc thực thi mã (RCE). Bao gồm payload detect phổ biến, dấu hiệu nhận biết và biện pháp phòng ngừa (không render template do user cung cấp, bật autoescape, sandbox, validate/whitelist input).",
     image: top10Logo,
     content: ssti,
     route: "Server-Side Template Injection",
