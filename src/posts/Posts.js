@@ -11,10 +11,12 @@ import idor_lfi_rce from "../posts/idor-lfi-rce.md";
 import nosqli from "../posts/nosqli.md";
 import musoe1Lab from "../posts/musoeCBJS.md";
 import cbjsblogLab from "../posts/CBJSBlog.md";
+import cve_2026_33937 from "../posts/cve-2026-33937.md";
 import ISPminiCTF from "../assets/img/ispminictf.png";
 import ISPminiCTFLogo from "../assets/img/ispminictf2.png";
 import top10Logo from "../assets/img/owasp-top-ten-1000.png";
 import CbjsLogo from "../assets/img/cbjs.png";
+import freshshoplogo from "../assets/img/freshshoplogo.png";
 
 const Posts = [
   {
@@ -23,7 +25,7 @@ const Posts = [
     description:
       "Phân tích lỗ hổng Handlebars AST Injection dẫn tới RCE trên FreshShop Lab. Bao gồm kiểm tra template rendering, khai thác NumberLiteral.value và xác nhận thực thi lệnh trên server.",
     image: freshshoplogo,
-    content: cve-2026-33937,
+    content: cve_2026_33937,
     route: "freshshop-cve-2026-33937",
   },
   {

@@ -5,16 +5,16 @@
   "dependencies": {
     "framer-motion": "^1.7.0",
     "history": "^4.10.1",
-    "marked": "^1.2.7",
+    "marked": "^18.0.5",
     "react": "^16.11.0",
     "react-awesome-reveal": "^3.5.1",
     "react-dom": "^16.11.0",
     "react-ga": "^2.7.0",
     "react-is": "^16.13.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "^3.3.0",
+    "react-scripts": "^5.0.1",
     "react-scroll-progress-read": "0.0.13",
-    "react-syntax-highlighter": "^12.2.1",
+    "react-syntax-highlighter": "^16.1.1",
     "styled-components": "^5.0.0"
   },
   "scripts": {
