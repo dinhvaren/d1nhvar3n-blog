@@ -22,8 +22,8 @@ const Posts = [
     date: "Jun 19, 2026",
     description:
       "Phân tích lỗ hổng Handlebars AST Injection dẫn tới RCE trên FreshShop Lab. Bao gồm kiểm tra template rendering, khai thác NumberLiteral.value và xác nhận thực thi lệnh trên server.",
-    image: FreshShopLogo,
-    content: freshshopLab,
+    image: freshshoplogo,
+    content: cve-2026-33937,
     route: "freshshop-cve-2026-33937",
   },
   {
