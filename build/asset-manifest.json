@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/static/js/main.4e2c47b1.js",
+    "main.js": "/static/js/main.e32edbbf.js",
     "static/media/freshshoplogo.png": "/static/media/freshshoplogo.27bc4efb86afcd745152.png",
     "static/media/cbjs.png": "/static/media/cbjs.9c595d9e3de52a5731ff.png",
     "static/media/ispminictf2.png": "/static/media/ispminictf2.66c6c56b50804d9ed18f.png",
@@ -8,7 +8,7 @@
     "static/media/owasp-top-ten-1000.png": "/static/media/owasp-top-ten-1000.edc580391a1963a10744.png",
     "static/media/miniCTF3.md": "/static/media/miniCTF3.8a4714cede73f379b7e4.md",
     "static/media/ssrf.md": "/static/media/ssrf.40cf25c5f66ffa2bd472.md",
-    "static/media/cve-2026-33937.md": "/static/media/cve-2026-33937.417909d40585d0de8033.md",
+    "static/media/cve-2026-33937.md": "/static/media/cve-2026-33937.93e59c20c2375eb1249e.md",
     "static/media/htmli.md": "/static/media/htmli.9c5631283323e653a2b7.md",
     "static/media/xxe.md": "/static/media/xxe.aaf52b3f81f86edade13.md",
     "static/media/nosqli.md": "/static/media/nosqli.f57d74b80f2b7b0694aa.md",
@@ -21,9 +21,9 @@
     "static/media/ssti.md": "/static/media/ssti.3ea12a57efa8561e9ffd.md",
     "static/media/Top10-OWASP.md": "/static/media/Top10-OWASP.fc00eb11612c453b2705.md",
     "index.html": "/index.html",
-    "main.4e2c47b1.js.map": "/static/js/main.4e2c47b1.js.map"
+    "main.e32edbbf.js.map": "/static/js/main.e32edbbf.js.map"
   },
   "entrypoints": [
-    "static/js/main.4e2c47b1.js"
+    "static/js/main.e32edbbf.js"
   ]
 }
