@@ -2,20 +2,20 @@
 
 Một mẫu blog cá nhân sử dụng React + Markdown — dễ dàng mở rộng, tùy chỉnh nội dung bằng file `.md`.
 
-## 🔍 Giới thiệu
+## Giới thiệu
 
 * Demo: [d1nhvar3n-blog.io.vn](https://d1nhvar3n-blog.io.vn)
 * Đây là template blog dùng React (Create React App), styled-components, và nội dung bài viết được viết dưới dạng Markdown.
 * Mục đích: để bạn dễ dàng tạo blog cá nhân mà không cần xây dựng từ đầu — chỉ cần viết bài dưới dạng `.md`, cấu hình Posts, và deploy.
 
-## 🧰 Công nghệ sử dụng
+## Công nghệ sử dụng
 
 * React (Create React App)
 * styled-components
 * Markdown để viết nội dung bài viết
 * Triển khai (deployment): Netlify
 
-## 🚀 Cách chạy project
+## Cách chạy project
 
 1. Clone repo:
 
@@ -40,13 +40,13 @@ Một mẫu blog cá nhân sử dụng React + Markdown — dễ dàng mở rộ
 
    Sau đó mở `http://localhost:3000` để xem blog của bạn.
 
-## ✍️ Thêm bài viết mới (Markdown)
+## Thêm bài viết mới (Markdown)
 
 1. Tạo file Markdown mới: ví dụ `posts/ten-bai-viet.md`
 2. Mở file `src/Posts.js`, thêm thông tin bài viết (route, tiêu đề, đường dẫn file `.md`) để blog tự sinh trang cho nó
 3. Khởi động lại app (nếu cần) để xem bài viết hiển thị.
 
-## 📂 Cấu trúc thư mục (tóm gọn)
+## Cấu trúc thư mục (tóm gọn)
 
 ```
 d1nhvar3n-blog/
@@ -61,7 +61,7 @@ d1nhvar3n-blog/
 └── …                      # các file cấu hình khác
 ```
 
-## 📝 Gợi ý chỉnh sửa & mở rộng
+## Gợi ý chỉnh sửa & mở rộng
 
 * Bạn có thể thay **theme / style** bằng cách chỉnh styled-components
 * Thêm tính năng như comment, tìm kiếm, phân loại, phân trang
@@ -69,7 +69,7 @@ d1nhvar3n-blog/
 * Tích hợp CMS headless như Netlify CMS để quản lý bài viết qua giao diện
 
 
-## 📜 Bản quyền & Giấy phép
+## Bản quyền & Giấy phép
 
 © 2025 **Lương Nguyễn Ngọc Đình (d1nhvar3n)**.
 
